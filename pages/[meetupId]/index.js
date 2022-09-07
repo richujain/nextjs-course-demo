@@ -34,7 +34,9 @@ export async function getStaticPaths() {
 
   client.close();
   return {
-    fallback: false,
+    // fallback to true or blocking tell NodeJS that there might be more paths that are specified.
+    // Instead of showing 404, it fetches the path and store it in cache and regenerate whenever needed. 
+    fallback: blocking,
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
